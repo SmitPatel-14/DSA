@@ -1,5 +1,3 @@
-class Solution {
-public:
     vector<int> selectionSort(vector<int>& nums) {
         int n = nums.size();
         vector<int> ans = nums; // correct way to copy the vector
@@ -19,7 +17,6 @@ public:
 
         return ans;
     }
-};
 
 //bubble Sort 
 void bubblesort(int arr[], int n) {
