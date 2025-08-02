@@ -13,7 +13,7 @@ public:
 
         return ansrow;
     }
-
+//function 
     vector<vector<int>> generate(int numRows) {
         vector<vector<int>> ans;
         for (int i = 0; i < numRows; i++) {
