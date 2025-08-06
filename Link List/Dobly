@@ -1,0 +1,15 @@
+//constructor for dll
+class node{
+    public
+    int data;
+    node* next;
+    node* back;
+    public 
+    node(int data,node* next,node* back){
+        data = d1;
+    }
+}
+
+
+//array to dll
+node arraytodll(arr[]nums)
