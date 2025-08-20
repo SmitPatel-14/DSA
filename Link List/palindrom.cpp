@@ -1,34 +1,61 @@
+// brute O(2n),O(n)
 class Solution {
 public:
     bool isPalindrome(ListNode* head) {
-        if (!head || !head->next) return true; // Single or empty list
+        std::stack<int> st;  
+        ListNode* temp = head;
+        while(temp!=nullptr){
+            st.push(temp->val);
+            temp = temp->next;
+        }
+        temp = head;
+        while(temp!=nullptr){
+            
+            if(temp->val != st.top()){
+                return false;
+            }
+            temp = temp->next;
+            st.pop();
+        }
+        return true;
+    }
+};
 
-        // Step 1: Find the middle (slow will be at middle)
-        ListNode *slow = head, *fast = head;
-        while (fast && fast->next) {
+// optimal O(2n),O(1)
+
+class Solution {
+    ListNode* reverseList(ListNode* head) {
+        if (head == nullptr || head->next == nullptr) {
+            return head;
+        }
+        
+        ListNode* newHead = reverseList(head->next);
+        ListNode* front = head->next;
+        front->next = head;
+        head->next = nullptr;
+        
+        return newHead;
+    }
+public:
+    bool isPalindrome(ListNode* head) {
+        ListNode* slow = head;
+        ListNode* fast = head;
+        while(fast->next!=NULL && fast->next->next!=NULL){
             slow = slow->next;
             fast = fast->next->next;
         }
-
-        // Step 2: Reverse the second half
-        ListNode* prev = nullptr;
-        ListNode* curr = slow;
-        while (curr) {
-            ListNode* nextNode = curr->next;
-            curr->next = prev;
-            prev = curr;
-            curr = nextNode;
-        }
-
-        // Step 3: Compare first half and reversed second half
+        ListNode* newhead =  reverseList(slow->next);
         ListNode* first = head;
-        ListNode* second = prev; // prev is head of reversed second half
-        while (second) {
-            if (first->val != second->val) return false;
+        ListNode* second = newhead;
+        while(second!=nullptr){
+            if(first->val != second->val){
+                 reverseList(newhead);
+                 return false;
+            }
             first = first->next;
             second = second->next;
         }
-
-        return true;
+         reverseList(newhead);
+         return true;
     }
 };
